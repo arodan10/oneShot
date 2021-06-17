@@ -73,6 +73,7 @@ func calcularTiempo(numero *big.Int, msg string){
 func makeTimestamp() int64 {
     return time.Now().UnixNano() / int64(time.Millisecond)
 }
+
 func mainFibonacci(numero int64){
   ti := time.Now()
   runtime.GOMAXPROCS(4)
@@ -116,30 +117,48 @@ func mainFibonacci(numero int64){
   tf := time.Now()
   fmt.Printf("Total tiempo %s \n",  tf.Sub(ti))     
 }
+
 func mainPruebaFibonaci(numero int64){
 	//nproc --all
 	//lscpu | grep 'CPU(s)'
   //free -h
   ti := time.Now()
-  runtime.GOMAXPROCS(2)
+  runtime.GOMAXPROCS(4)
   var wg sync.WaitGroup
-  wg.Add(2)
+  wg.Add(4)
   go func() {
     defer wg.Done()
     fmt.Println("-----Factorial recursivo-----")
-    go fibonacciRecur(numero)
-  }()  
+    fibonacciRecur(numero)
+  }() 
   go func() {
     defer wg.Done()
     fmt.Println("-----Factorial recursivo-----")
-    go FactorialBigRecur(numero)
-  }()  
-  wg.Wait()  
+    FactorialBigRecur(numero)
+  }()    
+  
+  go func() {
+    defer wg.Done()
+    fmt.Println("-----Factorial recursivo-----")
+    FactorialBigRecur(numero+1)
+  }()   
+
+  go func() {
+    defer wg.Done()
+    fmt.Println("-----Factorial recursivo-----")
+    FactorialBigRecur(numero+1)
+  }()    
+ 
+
+  wg.Wait() 
   /*
 	//for i := int64(1); i <= numero; i++ {
-	 fibonacciRecur(numero) //go fibonacciRecur(numero)
-   FactorialBigRecur(numero)
-	//}*/
+	  fibonacciRecur(numero) //go fibonacciRecur(numero)
+    FactorialBigRecur(numero)
+    fibonacciRecur(numero+1)
+    FactorialBigRecur(numero+1)
+	//} */
+  
   tf := time.Now()
   fmt.Printf("Total tiempo %s \n",  tf.Sub(ti))     
 }
