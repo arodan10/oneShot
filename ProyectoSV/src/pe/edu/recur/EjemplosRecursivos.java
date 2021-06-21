@@ -1,4 +1,4 @@
-package pe.edu.upeu.recur;
+package pe.edu.recur;
 
 import java.math.BigInteger;
 
