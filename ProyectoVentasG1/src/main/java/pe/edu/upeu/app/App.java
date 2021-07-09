@@ -3,7 +3,7 @@ package pe.edu.upeu.app;
 import pe.edu.upeu.dao.CategoriaDAO;
 import pe.edu.upeu.dao.ProductoDAO;
 import pe.edu.upeu.dao.UsuarioDAO;
-import pe.edu.upeu.gui.MainGUI;
+//import pe.edu.upeu.gui.MainGUI;
 import pe.edu.upeu.util.TecladoRead;
 
 /**
